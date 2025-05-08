@@ -1,41 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // --- Mobile Navigation Toggle (Keep this) ---
-    const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
-    const mainNav = document.querySelector('.main-nav ul');
-
-    if (mobileNavToggle && mainNav) {
-        mobileNavToggle.addEventListener('click', function() {
-            mainNav.parentNode.classList.toggle('active');
-            const isExpanded = mainNav.parentNode.classList.contains('active');
-            mobileNavToggle.setAttribute('aria-expanded', isExpanded);
-            if (isExpanded) {
-                mobileNavToggle.innerHTML = '&times;';
-            } else {
-                mobileNavToggle.innerHTML = '☰';
-            }
-        });
-    }
-
-    // --- Dynamic Year in Footer (Keep this) ---
-    const yearSpan = document.getElementById('currentYear');
-    if (yearSpan) {
-        yearSpan.textContent = new Date().getFullYear();
-    }
-
-    // --- Optional: Add smooth scrolling for anchor links (Keep this) ---
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            const targetId = this.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
-            if (targetElement) {
-                e.preventDefault();
-                targetElement.scrollIntoView({
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
-
     // --- LEAFLET MAP INITIALIZATION AND GEOJSON LOADING ---
     var map = L.map('interactiveMap').setView([40.8, -73.2], 10); // Adjust coordinates and zoom
 
@@ -78,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Load Census Tracts GeoJSON
-    fetch('/data/CensusTracts.geojson') // Adjust path if needed
+    fetch('/data/CensusTracts.geojson') // Path is CORRECT (relative to index.html)
         .then(response => response.json())
         .then(data => {
             L.geoJSON(data, {
@@ -92,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
     // Load Mill Pond Buffer GeoJSON
-    fetch('/data/MillPond_Buffer.geojson') // Adjust path if needed
+    fetch('/data/MillPond_Buffer.geojson') // Path is CORRECT (relative to index.html)
         .then(response => response.json())
         .then(data => {
             L.geoJSON(data, {
@@ -105,7 +68,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
     // Load Stump Pond Buffer GeoJSON
-    fetch('/data/StumpPond_Buffer.geojson') // Adjust path if needed
+    fetch('/data/StumpPond_Buffer.geojson') // Path is CORRECT (relative to index.html)
         .then(response => response.json())
         .then(data => {
             L.geoJSON(data, {
@@ -118,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
     // Load Town Polygon GeoJSON
-    fetch('/data/Town_Polygon.geojson') // Adjust path if needed
+    fetch('/data/Town_Polygon.geojson') // Path is CORRECT (relative to index.html)
         .then(response => response.json())
         .then(data => {
             L.geoJSON(data, {
