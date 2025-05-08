@@ -11,29 +11,14 @@
           integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
           crossorigin=""/>
     <link rel="stylesheet" href="style.css">
-    </head>
+    <style>
+        #interactiveMap {
+            height: 500px; /* Adjust as needed */
+            width: 100%;
+        }
+    </style>
+</head>
 <body>
-    <header class="site-header">
-        <div class="container header-flex">
-             <div class="logo-container">
-                 <a href="index.html" class="site-title">Suffolk Ponds Initiative</a>
-             </div>
-             <nav class="main-nav">
-                 <ul>
-                     <li><a href="index.html">Home</a></li>
-                     <li><a href="issue-explained.html">The Issue</a></li>
-                     <li><a href="visualizations.html" class="active">Maps & Data</a></li>
-                     <li><a href="gallery.html">Gallery</a></li>
-                     <li><a href="engage.html">Get Involved</a></li>
-                 </ul>
-             </nav>
-             <button class="mobile-nav-toggle" aria-label="Toggle Menu" aria-controls="main-nav-ul" aria-expanded="false">
-                <span class="sr-only">Menu</span>
-                ☰
-            </button>
-         </div>
-    </header>
-
     <main>
         <section class="page-hero-section" style="background-image: url('images/interactive-data-banner.jpg');">
             <div class="page-hero-content container">
@@ -58,89 +43,12 @@
             </article>
             <hr class="content-divider">
 
-            <article class="visualization-article">
-                 <h2 class="visualization-title">Community Context within Buffer Zones</h2>
-                 <div class="chart-container">
-                     <canvas id="populationBarChart"></canvas>
-                     <h3 class="text-center">Population Totals (2020 Census)</h3>
-                 </div>
-                 <div class="analysis-text">
-                     <p>Comparison of total population within 1.5km of each pond.</p>
-                     <p><em>[Add population analysis.]</em></p>
-                 </div>
-                 <hr class="content-divider-minor">
-
-                 <div class="pie-chart-container">
-                     <div class="chart-container pie-chart">
-                         <canvas id="millPondPieChart"></canvas>
-                         <h3 class="text-center">Mill Pond Buffer Land Use (2016)</h3>
-                     </div>
-                     <div class="chart-container pie-chart">
-                         <canvas id="stumpPondPieChart"></canvas>
-                         <h3 class="text-center">Stump Pond Buffer Land Use (2016)</h3>
-                     </div>
-                 </div>
-                  <div class="table-container">
-                     <h3 class="text-center">Land Use Legend</h3>
-                     <table id="landUseTable" class="styled-table">
-                         <thead><tr><th>Code</th><th>Land Use Type</th><th>Color</th></tr></thead>
-                         <tbody></tbody>
-                     </table>
-                  </div>
-                  <div class="analysis-text">
-                     <p>Breakdown of land use types within the buffer zones.</p>
-                     <p><em>[Add land use analysis.]</em></p>
-                 </div>
-                 <hr class="content-divider-minor">
-                 <div class="chart-container">
-                    <canvas id="parcelCountBarChart"></canvas>
-                    <h3 class="text-center">Parcel Counts by Land Use Type</h3>
-                 </div>
-                  <div class="analysis-text">
-                     <p>Number of parcels per land use type within the buffer zones.</p>
-                      <p><em>[Add parcel count analysis.]</em></p>
-                  </div>
-            </article>
-             <hr class="content-divider">
-
-             <article class="visualization-article">
-                <h2 class="visualization-title">Real Estate Market Trends (Mar 2024 - Mar 2025)</h2>
-                <div class="chart-container">
-                     <canvas id="medianSalePriceChart"></canvas>
-                     <h3 class="text-center">Median Sale Price</h3>
-                 </div>
-                 <div class="analysis-text">
-                     <p>Monthly median sale price trends for Smithtown and Stony Brook.</p>
-                     <p><em>[Add price trend analysis.]</em></p>
-                 </div>
-                 <hr class="content-divider-minor">
-                  <div class="chart-container">
-                     <canvas id="homesSoldChart"></canvas>
-                     <h3 class="text-center">Homes Sold</h3>
-                 </div>
-                  <div class="analysis-text">
-                     <p>Monthly number of homes sold trends.</p>
-                     <p><em>[Add homes sold analysis.]</em></p>
-                 </div>
-                 <hr class="content-divider-minor">
-                 <div class="chart-container">
-                     <canvas id="inventoryChart"></canvas>
-                     <h3 class="text-center">Housing Inventory</h3>
-                 </div>
-                 <div class="analysis-text">
-                     <p>Monthly housing inventory trends.</p>
-                     <p><em>[Add inventory analysis.]</em></p>
-                 </div>
-            </article>
-
-        </section>
+            </section>
     </main>
-
-    <footer class="site-footer-bottom">
-         </footer>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="visualizations.js"></script>
-    <script src="script.js"></script> </body>
+    <script src="script.js"></script>
+</body>
 </html>
