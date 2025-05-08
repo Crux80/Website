@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suffolk Ponds Initiative - Stony Brook & Smithtown</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-flex">
+            <div class="logo-container">
+                <a href="index.html" class="site-title">Suffolk Ponds Initiative</a>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="issue-explained.html">The Issue</a></li>
+                    <li><a href="visualizations.html">Maps & Data</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="engage.html">Get Involved</a></li>
+                </ul>
+            </nav>
+            <button class="mobile-nav-toggle" aria-label="Toggle Menu" aria-controls="main-nav-ul" aria-expanded="false">
+                <span class="sr-only">Menu</span>
+                ☰
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-section">
+            <div class="hero-image-container" style="background-image: url('images/suffolk-ponds-hero.jpg');">
+                </div>
+            <div class="hero-content container">
+                <h1>Our Ponds, Our Future: Stony Brook & Smithtown</h1>
+                <p class="subtitle">Understanding the challenges and decisions facing Stony Brook Mill Pond and Smithtown's Stump Pond after the August 2024 storms.</p>
+                <a href="issue-explained.html" class="btn btn-primary">Learn About the Issues</a>
+                <a href="engage.html" class="btn btn-secondary">How to Get Involved</a>
+            </div>
+        </section>
+
+        <section class="introduction-section container section-padding">
+            <h2>A Critical Time for Our Local Waterways</h2>
+            <p>The historic dams at Stony Brook's Mill Pond and Smithtown's Stump Pond were severely damaged in August 2024, leading to significant environmental and community impacts. Decisions on rebuilding or restoration are underway. This website serves as a resource for information, data, and community engagement regarding the future of these cherished Suffolk County landmarks.</p>
+        </section>
+
+        <section class="key-areas-section section-padding bg-medium">
+            <div class="container">
+                <h2 class="section-title">Explore Key Aspects</h2>
+                <div class="cards-container">
+                    <div class="card">
+                         <img src="images/icons/icon-issue.svg" alt="" class="card-icon"> <h3>The Core Issues</h3>
+                         <p>Delve into the history, the storm's impact, ecological factors, and the ongoing debate surrounding the dams.</p>
+                         <a href="issue-explained.html" class="card-link">Read the Details &rarr;</a>
+                     </div>
+                    <div class="card">
+                        <img src="images/icons/icon-map.svg" alt="" class="card-icon"> <h3>Interactive Data</h3>
+                        <p>Explore maps showing affected areas, population density, land use, and view property value trends.</p>
+                        <a href="visualizations.html" class="card-link">View Maps & Charts &rarr;</a>
+                    </div>
+                    <div class="card">
+                        <img src="images/icons/icon-gallery.svg" alt="" class="card-icon"> <h3>Visual History</h3>
+                        <p>See photos of the ponds through time, including historical views and images showing recent changes.</p>
+                        <a href="gallery.html" class="card-link">Browse the Gallery &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="latest-updates-section container section-padding">
+            <h2 class="section-title">Latest News & Updates</h2>
+            <div class="updates-grid">
+                <article class="update-item">
+                    <img src="images/placeholder-news1.jpg" alt="Placeholder News Image 1" class="update-image">
+                    <div class="update-content">
+                        <span class="update-date">May 8, 2025</span> <h3>County Provides Update on Stump Pond Dam Restoration</h3>
+                        <p>Suffolk County Executive Ed Romaine announced progress on the engineering and permitting phases for the Stump Pond dam replacement...</p>
+                        <a href="#" class="read-more-link">Read More</a> </div>
+                </article>
+                <article class="update-item">
+                     <img src="images/placeholder-news2.jpg" alt="Placeholder News Image 2" class="update-image">
+                    <div class="update-content">
+                        <span class="update-date">May 1, 2025</span> <h3>Public Input Session Scheduled for Stony Brook</h3>
+                        <p>Local officials will host a meeting to gather community feedback on the proposed options for the Stony Brook Mill Pond dam and Harbor Road...</p>
+                        <a href="#" class="read-more-link">Meeting Details</a> </div>
+                </article>
+            </div>
+            </section>
+
+        </main>
+
+    <footer class="site-footer-bottom">
+        <div class="container">
+            <div class="footer-nav">
+                <a href="about.html">About Us</a> | <a href="contact.html">Contact</a> | <a href="privacy.html">Privacy Policy</a> </div>
+            <p>&copy; <span id="currentYear"></span> Suffolk Ponds Initiative. All Rights Reserved.</p>
+            <p class="disclaimer">A community information resource for Stony Brook Mill Pond & Smithtown's Stump Pond.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - Suffolk Ponds Initiative</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css"></head><body>
+    <header class="site-header">
+        <div class="container header-flex">
+            <div class="logo-container">
+                 <a href="index.html" class="site-title">Suffolk Ponds Initiative</a>
+             </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="issue-explained.html">The Issue</a></li>
+                    <li><a href="visualizations.html">Maps & Data</a></li>
+                    <li><a href="gallery.html" class="active">Gallery</a></li>
+                    <li><a href="engage.html">Get Involved</a></li>
+                </ul>
+            </nav>
+            <button class="mobile-nav-toggle" aria-label="Toggle Menu" aria-controls="main-nav-ul" aria-expanded="false">
+                <span class="sr-only">Menu</span>
+                ☰
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-hero-section" style="background-image: url('images/gallery-banner.jpg');">
+            <div class="page-hero-content container">
+                <h1>Visual Chronicles: The Ponds Through Time</h1>
+                 <p class="subtitle">Explore historical images, the beauty before the storms, the impact of recent events, and the ongoing story of recovery.</p>
+             </div>
+        </section>
+
+        <section class="gallery-intro container section-padding">
+            <p>This gallery offers a visual journey through the history and recent experiences of Stony Brook's Mill Pond and Smithtown's Stump Pond. Images contributed by local archives, residents, and project documentation.</p>
+            <div class="call-to-action-gallery text-center" style="margin-top: 20px;">
+                <p><strong>Have photos to share?</strong> We welcome community contributions! <a href="engage.html#submit-photos" class="btn btn-secondary">Submit Your Photos</a></p>
+            </div>
+        </section>
+
+        <section class="gallery-grid-section container section-padding">
+
+             <h2 class="gallery-category-title">Stony Brook Mill Pond: Historical & Pre-Storm</h2>
+            <div class="gallery-grid">
+                 <div class="gallery-item">
+                     <a href="images/stonybrook/sb_millpond_historical_01.jpg" data-lightbox="stonybrook-historical" data-title="Stony Brook Grist Mill and Mill Pond, circa 1920s.">
+                         <img src="images/stonybrook/thumbnails/sb_millpond_historical_01_thumb.jpg" alt="Historic view of Stony Brook Grist Mill and Mill Pond">
+                     </a>
+                     <figcaption>Stony Brook Grist Mill, 1920s</figcaption>
+                 </div>
+                 <div class="gallery-item">
+                    <a href="images/stonybrook/sb_millpond_prestorm_01.jpg" data-lightbox="stonybrook-prestorm" data-title="Serene view of Mill Pond before the August 2024 storm.">
+                        <img src="images/stonybrook/thumbnails/sb_millpond_prestorm_01_thumb.jpg" alt="Mill Pond at Stony Brook, calm waters pre-storm">
+                     </a>
+                     <figcaption>Mill Pond tranquility, pre-2024</figcaption>
+                 </div>
+             </div>
+            <hr class="content-divider">
+
+             <h2 class="gallery-category-title">Stump Pond (Blydenburgh Park): Pre-Storm Charm</h2>
+             <div class="gallery-grid">
+                  <div class="gallery-item">
+                     <a href="images/stump_pond/sp_prestorm_fishing.jpg" data-lightbox="stump-pond-prestorm" data-title="Anglers enjoying fishing at Stump Pond before its drainage.">
+                         <img src="images/stump_pond/thumbnails/sp_prestorm_fishing_thumb.jpg" alt="Fishing at Stump Pond, pre-storm">
+                     </a>
+                     <figcaption>Fishing at Stump Pond</figcaption>
+                 </div>
+                 </div>
+             <hr class="content-divider">
+
+            </section>
+    </main>
+
+    <footer class="site-footer-bottom">
+        <div class="container">
+            <div class="footer-nav">
+                <a href="about.html">About Us</a> |
+                <a href="contact.html">Contact</a> |
+                <a href="privacy.html">Privacy Policy</a>
+            </div>
+            <p>&copy; <span id="currentYear"></span> Suffolk Ponds Initiative. All Rights Reserved.</p>
+            <p class="disclaimer">This website is a community information resource for Suffolk County's Mill Pond (Stony Brook) and Stump Pond (Smithtown).</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    </body></html>
