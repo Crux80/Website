@@ -272,7 +272,7 @@ hr.content-divider-minor {
 .chart-container canvas { width: 100% !important; height: auto !important; } /* Ensure canvas is responsive */
 .chart-container h3 { text-align: center; font-size: 1.2rem; margin-top: 10px; color: var(--dark-text); }
 .pie-chart-container { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 20px; }
-.pie-chart { max-width: 650px; }
+.pie-chart { max-width: 800px; }
 .analysis-text { margin-top: 15px; }
 .analysis-text h3 { font-size: 1.4rem; color: var(--dark-text); margin-bottom: 10px; }
 .analysis-text p, .analysis-text ul { font-size: 0.95rem; line-height: 1.6; color: var(--muted-text); }
