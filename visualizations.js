@@ -68,11 +68,14 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     }
 
-    // Render all charts
+
+ // Render all charts
     Promise.all([
         createPlotlyChart('medianSalePriceChart', 'median_sale_price.json', 'Median Sale Price (Mar 2024 - Mar 2025)'),
         createPlotlyChart('homesSoldChart', 'homes_sold.json', 'Homes Sold Over Time (Mar 2024 - Mar 2025)'),
-        createPlotlyChart('inventoryChart', 'inventory.json', 'Inventory Over Time (Mar 2024 - Mar 2025)')
+        createPlotlyChart('inventoryChart', 'inventory.json', 'Inventory Over Time (Mar 2024 - Mar 2025)'),
+        createPlotlyChart('stumpPondLandUseChart', 'stump_pond_land_use.json', 'Stump Pond Land Use'),
+        createPlotlyChart('millPondLandUseChart', 'mill_pond_land_use.json', 'Mill Pond Land Use')
     ]).then(() => {
         console.log("All charts rendered successfully.");
     });
