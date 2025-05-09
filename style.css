@@ -351,6 +351,6 @@ hr.content-divider-minor {
     .updates-grid { grid-template-columns: 1fr; }
     .involvement-grid { grid-template-columns: 1fr; }
     .pie-chart-container { flex-direction: column; align-items: center; }
-    .pie-chart { max-width: 650px; } /* Adjust pie chart size */
+    .pie-chart { max-width: 950px; } /* Adjust pie chart size */
     .chart-container { max-width: 100%; } /* Allow charts to fill width */
 }
