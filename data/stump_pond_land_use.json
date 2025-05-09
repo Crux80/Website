@@ -1,7 +1,11 @@
 {
   "data": [
     {
-      "hovertemplate": "%{label}\u003cbr\u003eArea: %{value:.2f} km\u00b2\u003cextra\u003e\u003c\u002fextra\u003e",
+      "customdata": {
+        "dtype": "f8",
+        "bdata": "eNgk1bffvD98orWpZBadP\u002fQmkUQ0TbA\u002fR7ZRPMAF6T+oszO5lSb4P9CJoqljBhBAJ226q1m8sj9lDMqITeKTPza92HIXH6c\u002f"
+      },
+      "hovertemplate": "%{label}\u003cbr\u003ePercent: %{value:.2f}%\u003cbr\u003eArea: %{customdata:.2f} km\u00b2\u003cextra\u003e\u003c\u002fextra\u003e",
       "labels": [
         "Commercial",
         "High Density Residential",

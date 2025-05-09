@@ -1,7 +1,11 @@
 {
   "data": [
     {
-      "hovertemplate": "%{label}\u003cbr\u003eArea: %{value:.2f} km\u00b2\u003cextra\u003e\u003c\u002fextra\u003e",
+      "customdata": {
+        "dtype": "f8",
+        "bdata": "gnFZigMUwj+rh1oqHuK2P+KSHwEJWbA\u002fuWht3ucN5T\u002fBpDYEk3z2PxyAtyX\u002fuvQ\u002fH4tzypjd7z8hOTkxGZ72P9c\u002f2uNrL7o\u002fNQKlbljb2z8="
+      },
+      "hovertemplate": "%{label}\u003cbr\u003ePercent: %{value:.2f}%\u003cbr\u003eArea: %{customdata:.2f} km\u00b2\u003cextra\u003e\u003c\u002fextra\u003e",
       "labels": [
         "Agriculture",
         "Commercial",
