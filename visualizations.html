@@ -11,6 +11,11 @@
           integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
           crossorigin=""/>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+          crossorigin=""/>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script> 
     </head>
 <body>
     <header class="site-header">
@@ -48,14 +53,37 @@
              </div>
 
              <article class="visualization-article">
-                <h2 class="visualization-title">Population Density, Land Use & Key Locations</h2>
-                <div id="interactiveMap" class="map-container"><p style="text-align:center; padding-top: 50px;">Map Loading...</p></div>
+                <h2 class="visualization-title">Hydrological Assessment</h2>  <div class="dashboard-container">
+                    <iframe
+                        src="https://www.arcgis.com/apps/dashboards/5468ea64b8c5441c9949cd4b7814d41d"
+                        width="100%"
+                        height="800px"  frameborder="0"
+                        title="Hydrological Assessment"
+                        allowfullscreen>
+                    </iframe>
+                </div>
                 <div class="analysis-text">
-                    <h3>Map Exploration</h3>
-                    <p>Use map controls to zoom, pan, and explore layers showing Population Density (by Census Tract), Land Use (simplified categories), Dam Locations, and the 1.5km Buffer Zones around Mill Pond and Stump Pond.</p>
-                    <p><em>[Add your detailed map analysis here.]</em></p>
+                    <p>Explore real estate market trends for Smithtown and Stony Brook, including median sale prices, homes sold, and housing inventory.</p>
+                    <p>Use the interactive elements within the dashboard to filter data and gain deeper insights.</p>
                 </div>
             </article>
+            
+            <style>
+                .dashboard-container {
+                    width: 100%;
+                    margin: 20px auto;
+                    border: 1px solid #ccc;
+                    border-radius: 5px;
+                    overflow: hidden;
+                }
+            
+                @media (max-width: 768px) {
+                    .dashboard-container iframe {
+                        height: 600px;
+                    }
+                }
+            </style>
+
             <hr class="content-divider">
 
             <article class="visualization-article">
@@ -106,31 +134,22 @@
              <article class="visualization-article">
                 <h2 class="visualization-title">Real Estate Market Trends (Mar 2024 - Mar 2025)</h2>
                 <div class="chart-container">
-                     <canvas id="medianSalePriceChart"></canvas>
-                     <h3 class="text-center">Median Sale Price</h3>
-                 </div>
-                 <div class="analysis-text">
-                     <p>Monthly median sale price trends for Smithtown and Stony Brook.</p>
-                     <p><em>[Add price trend analysis.]</em></p>
-                 </div>
-                 <hr class="content-divider-minor">
-                  <div class="chart-container">
-                     <canvas id="homesSoldChart"></canvas>
-                     <h3 class="text-center">Homes Sold</h3>
-                 </div>
-                  <div class="analysis-text">
-                     <p>Monthly number of homes sold trends.</p>
-                     <p><em>[Add homes sold analysis.]</em></p>
-                 </div>
-                 <hr class="content-divider-minor">
+                    <div id="medianSalePriceChart"></div>  <h3 class="text-center">Median Sale Price</h3>
+                </div>
+                <div class="analysis-text">
+                    </div>
+                <hr class="content-divider-minor">
                  <div class="chart-container">
-                     <canvas id="inventoryChart"></canvas>
-                     <h3 class="text-center">Housing Inventory</h3>
-                 </div>
+                    <div id="homesSoldChart"></div>   <h3 class="text-center">Homes Sold</h3>
+                </div>
                  <div class="analysis-text">
-                     <p>Monthly housing inventory trends.</p>
-                     <p><em>[Add inventory analysis.]</em></p>
-                 </div>
+                    </div>
+                <hr class="content-divider-minor">
+                <div class="chart-container">
+                    <div id="inventoryChart"></div>   <h3 class="text-center">Housing Inventory</h3>
+                </div>
+                <div class="analysis-text">
+                    </div>
             </article>
 
         </section>
