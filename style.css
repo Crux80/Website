@@ -248,6 +248,75 @@ hr.content-divider-minor {
 .inline-image-left { float: left; margin-right: 20px; margin-bottom: 10px; max-width: 45%; }
 .content-article section::after { content: ""; display: table; clear: both; } /* Clear floats */
 
+/* === ADD THESE NEW STYLES FOR THE HISTORY SECTION LAYOUT === */
+
+/* Optional: Style the main heading of the history section if needed */
+#history h2 {
+    text-align: center;
+    margin-bottom: 25px; /* Adjust spacing as you like */
+}
+
+/* This is the new Flexbox container that will wrap your two columns */
+.history-layout-container {
+    display: flex;          /* Enables Flexbox layout */
+    flex-wrap: wrap;        /* Allows columns to stack on smaller screens */
+    gap: 30px;              /* Creates space (gutter) between the columns */
+    align-items: flex-start; /* Aligns the top of the columns with each other.
+                                 Other options: 'stretch' (to make columns equal height if they have backgrounds/borders),
+                                 'center' (to center them vertically relative to each other). */
+}
+
+/* This is the style for each individual column (Stump Pond info, Mill Pond info) */
+.history-column {
+    flex: 1;                /* Allows each column to grow and shrink equally to share space.
+                                 If you want one column wider than the other, you could use 'flex-grow' differently,
+                                 or set specific flex-basis percentages. For two equal columns, 'flex: 1' is common. */
+    min-width: 300px;       /* A good practice: prevents columns from becoming too narrow
+                                 on medium screens before they wrap or stack. Adjust this value as needed.
+                                 For example, if you want them to stack sooner, make this value larger. */
+}
+
+/*
+   Your existing styles for 'figure', 'figure img', and 'figcaption'
+   within '.content-article' will likely still apply.
+   However, for images directly within '.history-column figure',
+   ensure they are responsive and don't break the column layout.
+*/
+.history-column figure img {
+    max-width: 100%;        /* Makes sure the image doesn't overflow its column */
+    height: auto;           /* Maintains the image's aspect ratio */
+    display: block;         /* Removes extra space below the image if it's an inline element */
+    /* Your existing border-radius and box-shadow for images will still be inherited if specific enough,
+       or you can re-declare them here if needed: */
+    /* border-radius: var(--border-radius); */
+    /* box-shadow: 0 2px 8px rgba(0,0,0,0.1); */
+}
+
+/*
+   Optional: If headings (h3) are the very first element in a column,
+   you might want to remove their default top margin.
+*/
+.history-column h3:first-child {
+    margin-top: 0;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) { /* Adjust this breakpoint (768px) as needed */
+    .history-layout-container {
+        flex-direction: column; /* Stacks the columns vertically */
+    }
+    .history-column {
+        min-width: 100%;       /* Allows each column to take the full width when stacked */
+                               /* (or 'min-width: unset;' if you want it to behave more like a normal block) */
+        margin-bottom: 30px;   /* Adds space between the stacked columns */
+    }
+    .history-column:last-child {
+        margin-bottom: 0;      /* Removes margin from the last stacked item */
+    }
+}
+
+/* === END OF NEW STYLES FOR HISTORY SECTION LAYOUT === */
+
 /* --- Gallery Page --- */
 .gallery-intro p { font-size: 1.05rem; text-align: center; max-width: 800px; margin: 0 auto; }
 .gallery-category-title { font-size: 1.8rem; color: var(--primary-color); margin-top: 40px; margin-bottom: 20px; text-align: center; border-bottom: 2px solid var(--bg-accent); padding-bottom: 10px; }
