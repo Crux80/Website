@@ -36,37 +36,42 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // --- CHART.JS INITIALIZATION (Keep this if you are using the charts)---
-    //  (Your Chart.js code would go here)
-    //  For example:
-    //  const populationBarChart = new Chart(document.getElementById('populationBarChart'), { ... });
-    //  const millPondPieChart = new Chart(document.getElementById('millPondPieChart'), { ... });
-    //  etc.
-
     // --- Plotly Chart Rendering ---
 
     // Function to create and render a Plotly chart
-    function createPlotlyChart(chartId, jsonDataUrl) {
+    function createPlotlyChart(chartId, jsonDataUrl, chartTitle) {
         return fetch(jsonDataUrl)
             .then(response => response.json())
             .then(data => {
-                Plotly.newPlot(chartId, data.data, data.layout);
+                const layout = {
+                    ...data.layout, // Merge fetched layout with any specific settings
+                    title: {
+                        text: chartTitle, // Set the chart title
+                        font: {
+                            family: 'Merriweather', // Use your heading font
+                            size: 20,
+                            color: '#005A9C'      // Use your primary color
+                        },
+                        x: 0.5,             // Center the title
+                        xanchor: 'center'
+                    },
+                    responsive: true     // Make the chart responsive
+                };
+                Plotly.newPlot(chartId, data.data, layout);
             })
             .catch(error => {
                 console.error('Error fetching ' + jsonDataUrl + ':', error);
-                // Optionally, display an error message on the page
-                document.getElementById(chartId).innerHTML = "<p>Error loading chart data.</p>";
+                document.getElementById(chartId).innerHTML = "<p>Error loading " + chartTitle + " data.</p>";
             });
     }
 
     // Render the charts
     Promise.all([
-        createPlotlyChart('medianSalePriceChart', '/data/median_sale_price.json'),
-        createPlotlyChart('homesSoldChart', '/data/homes_sold.json'),
-        createPlotlyChart('inventoryChart', '/data/inventory.json')
+        createPlotlyChart('medianSalePriceChart', '/data/median_sale_price.json', 'Median Sale Price (Mar 2024 - Mar 2025)'),
+        createPlotlyChart('homesSoldChart', '/data/homes_sold.json', 'Homes Sold Over Time (Mar 2024 - Mar 2025)'),
+        createPlotlyChart('inventoryChart', '/data/inventory.json', 'Inventory Over Time (Mar 2024 - Mar 2025)')
     ]).then(() => {
         console.log("All charts rendered successfully (or errors handled).");
     });
-
 
 });
