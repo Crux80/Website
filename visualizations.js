@@ -8,11 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
             mainNav.parentNode.classList.toggle('active');
             const isExpanded = mainNav.parentNode.classList.contains('active');
             mobileNavToggle.setAttribute('aria-expanded', isExpanded);
-            if (isExpanded) {
-                mobileNavToggle.innerHTML = '&times;';
-            } else {
-                mobileNavToggle.innerHTML = '☰';
-            }
+            mobileNavToggle.innerHTML = isExpanded ? '&times;' : '☰';
         });
     }
 
@@ -37,41 +33,48 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // --- Plotly Chart Rendering ---
+    const basePath = window.location.pathname.replace(/\/[^/]*$/, '/');
 
-    // Function to create and render a Plotly chart
-    function createPlotlyChart(chartId, jsonDataUrl, chartTitle) {
-        return fetch(jsonDataUrl)
-            .then(response => response.json())
+    function createPlotlyChart(chartId, fileName, chartTitle) {
+        const jsonUrl = basePath + 'data/' + fileName;
+
+        return fetch(jsonUrl)
+            .then(response => {
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                return response.json();
+            })
             .then(data => {
                 const layout = {
-                    ...data.layout, // Merge fetched layout with any specific settings
+                    ...data.layout,
                     title: {
-                        text: chartTitle, // Set the chart title
+                        text: chartTitle,
                         font: {
-                            family: 'Merriweather', // Use your heading font
+                            family: 'Merriweather',
                             size: 20,
-                            color: '#005A9C'      // Use your primary color
+                            color: '#005A9C'
                         },
-                        x: 0.5,             // Center the title
+                        x: 0.5,
                         xanchor: 'center'
-                    },
-                    responsive: true     // Make the chart responsive
+                    }
                 };
-                Plotly.newPlot(chartId, data.data, layout);
+                Plotly.newPlot(chartId, data.data, layout, { responsive: true });
             })
             .catch(error => {
-                console.error('Error fetching ' + jsonDataUrl + ':', error);
-                document.getElementById(chartId).innerHTML = "<p>Error loading " + chartTitle + " data.</p>";
+                console.error('Error fetching ' + jsonUrl + ':', error);
+                const chartContainer = document.getElementById(chartId);
+                if (chartContainer) {
+                    chartContainer.innerHTML = `<p>Error loading ${chartTitle} data.</p>`;
+                }
             });
     }
 
-    // Render the charts
+    // Render all charts
     Promise.all([
-        createPlotlyChart('medianSalePriceChart', '/data/median_sale_price.json', 'Median Sale Price (Mar 2024 - Mar 2025)'),
-        createPlotlyChart('homesSoldChart', '/data/homes_sold.json', 'Homes Sold Over Time (Mar 2024 - Mar 2025)'),
-        createPlotlyChart('inventoryChart', '/data/inventory.json', 'Inventory Over Time (Mar 2024 - Mar 2025)')
+        createPlotlyChart('medianSalePriceChart', 'median_sale_price.json', 'Median Sale Price (Mar 2024 - Mar 2025)'),
+        createPlotlyChart('homesSoldChart', 'homes_sold.json', 'Homes Sold Over Time (Mar 2024 - Mar 2025)'),
+        createPlotlyChart('inventoryChart', 'inventory.json', 'Inventory Over Time (Mar 2024 - Mar 2025)')
     ]).then(() => {
-        console.log("All charts rendered successfully (or errors handled).");
+        console.log("All charts rendered successfully.");
     });
-
 });
+
