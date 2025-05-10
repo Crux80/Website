@@ -431,3 +431,24 @@ hr.content-divider-minor {
     .pie-chart { max-width: 950px; } /* Adjust pie chart size */
     .chart-container { max-width: 100%; } /* Allow charts to fill width */
 }
+@media (max-width: 768px) {
+  .visualizations {
+    padding: 1rem;
+  }
+
+  .visualizations .map-container {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    margin-bottom: 1rem;
+  }
+
+  .visualizations iframe,
+  .visualizations img,
+  .visualizations .map {
+    width: 100% !important;
+    height: auto !important;
+    max-width: 100%;
+    display: block;
+  }
+}
