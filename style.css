@@ -452,3 +452,19 @@ hr.content-divider-minor {
     display: block;
   }
 }
+
+@media (max-width: 768px) {
+  .chart-container {
+    padding: 10px;            /* Less padding on small screens */
+    margin: 10px auto;        /* Slightly reduce vertical spacing */
+    width: 100% !important;   /* Force full width on mobile */
+    max-width: 100% !important;
+    box-sizing: border-box;   /* Ensure padding doesn’t overflow */
+    overflow-x: auto;         /* Add horizontal scroll if chart content overflows */
+  }
+
+  .chart-container canvas {
+    width: 100% !important;
+    height: auto !important;
+  }
+}
