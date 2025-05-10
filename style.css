@@ -363,6 +363,30 @@ hr.content-divider-minor {
 .styled-table tbody tr:last-of-type { border-bottom: 2px solid var(--primary-color); }
 .color-box { display: inline-block; width: 15px; height: 15px; margin-right: 5px; border: 1px solid #ccc; vertical-align: middle; }
 
+@media (max-width: 768px) {
+  .chart-container {
+    position: relative;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 400px; /* Give the Plotly chart room to breathe on small screens */
+    padding: 10px;
+    margin: 20px auto;
+    box-sizing: border-box;
+    overflow-x: auto;
+  }
+
+  .chart-container .plot-container,
+  .chart-container .js-plotly-plot {
+    height: 100% !important;
+    width: 100% !important;
+  }
+
+  .chart-container canvas {
+    width: 100% !important;
+    height: 100% !important;
+  }
+}
+
 /* --- Engage Page --- */
 .involvement-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
 .involvement-card {
@@ -430,41 +454,4 @@ hr.content-divider-minor {
     .pie-chart-container { flex-direction: column; align-items: center; }
     .pie-chart { max-width: 950px; } /* Adjust pie chart size */
     .chart-container { max-width: 100%; } /* Allow charts to fill width */
-}
-@media (max-width: 768px) {
-  .visualizations {
-    padding: 1rem;
-  }
-
-  .visualizations .map-container {
-    width: 100%;
-    height: auto;
-    overflow: hidden;
-    margin-bottom: 1rem;
-  }
-
-  .visualizations iframe,
-  .visualizations img,
-  .visualizations .map {
-    width: 100% !important;
-    height: auto !important;
-    max-width: 100%;
-    display: block;
-  }
-}
-
-@media (max-width: 768px) {
-  .chart-container {
-    padding: 10px;            /* Less padding on small screens */
-    margin: 10px auto;        /* Slightly reduce vertical spacing */
-    width: 100% !important;   /* Force full width on mobile */
-    max-width: 100% !important;
-    box-sizing: border-box;   /* Ensure padding doesn’t overflow */
-    overflow-x: auto;         /* Add horizontal scroll if chart content overflows */
-  }
-
-  .chart-container canvas {
-    width: 100% !important;
-    height: auto !important;
-  }
 }
