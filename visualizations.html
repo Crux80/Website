@@ -7,16 +7,16 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
           integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
           crossorigin=""/>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-          crossorigin=""/>
+    
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script> 
-    </head>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+
+</head>
 <body>
     <header class="site-header">
         <div class="container header-flex">
@@ -49,37 +49,66 @@
 
         <section class="container section-padding">
              <div class="text-center" style="margin-bottom: 40px;">
-                 <p style="font-size: 1.1rem; max-width: 800px; margin: auto;">Interact with the map and charts below. Data is sourced from Suffolk County GIS, US Census, and Redfin Data Center.</p>
+                 <p style="font-size: 1.1rem; max-width: 800px; margin: auto;">Interact with the map and charts below. Data is sourced from Suffolk County GIS, US Census, Redfin Data Center, and NYS GIS.</p>
              </div>
 
              <article class="visualization-article">
-                <h2 class="visualization-title">Hydrological Assessment</h2>  <div class="dashboard-container">
+                <h2 class="visualization-title">Environmental Analysis Map Viewer</h2>
+                <div id="server-notice-container"></div>
+                <div id="map"> 
+                    <div id="map-loader"><div class="spinner"></div>Loading...</div>
+                    <div class="info-box" id="mapInfoBox">
+                        <div class="info-box-header" id="infoBoxHeader">
+                            Environmental Analysis Map <span class="info-box-toggle-icon">▼</span>
+                        </div>
+                        <div class="info-box-content" id="infoBoxContent">
+                            <p>Suffolk County, NY</p>
+                            <p>Explore various environmental and demographic datasets. Use the layer control (top right) to toggle layers and switch basemaps.</p>
+                        </div>
+                    </div>
+                    <div id="customLayerControl" class="custom-layer-control-container">
+                        <div class="layer-control-header">
+                            Layers <span class="layer-control-toggle-icon">▼</span>
+                        </div>
+                        <div class="leaflet-control-layers-host collapsed-control"></div>
+                    </div>
+                </div> {/* End of #map div */}
+                <div class="analysis-text" style="margin-top: 20px;">
+                    <p>This interactive map allows for the exploration of various environmental and demographic datasets related to the Suffolk County Ponds. You can toggle different data layers, including population density, town boundaries, watershed areas, FEMA elevation data, coastal risk zones, and land use. Use the layer control icon (usually in the top right of the map) to select layers and change basemaps. Click on features for more information (where available). The legend (bottom right) provides details about the currently displayed data.</p>
+                </div>
+             </article>
+
+             <hr class="content-divider">
+
+             <article class="visualization-article">
+                <h2 class="visualization-title">Hydrological Assessment Dashboard</h2>
+                <div class="dashboard-container">
                     <iframe
                         src="https://www.arcgis.com/apps/dashboards/5468ea64b8c5441c9949cd4b7814d41d"
                         width="100%"
                         height="800px"  frameborder="0"
-                        title="Hydrological Assessment"
+                        title="Hydrological Assessment Dashboard"
                         allowfullscreen>
                     </iframe>
                 </div>
                 <div class="analysis-text">
-                    <p>Explore real estate market trends for Smithtown and Stony Brook, including median sale prices, homes sold, and housing inventory.</p>
+                    <p>This dashboard provides a hydrological assessment related to the areas of interest. Explore the various metrics and visualizations presented.</p>
                     <p>Use the interactive elements within the dashboard to filter data and gain deeper insights.</p>
                 </div>
             </article>
             
-            <style>
+            <style> 
                 .dashboard-container {
                     width: 100%;
                     margin: 20px auto;
                     border: 1px solid #ccc;
                     border-radius: 5px;
-                    overflow: hidden;
+                    overflow: hidden; 
                 }
             
                 @media (max-width: 768px) {
                     .dashboard-container iframe {
-                        height: 600px;
+                        height: 600px; 
                     }
                 }
             </style>
@@ -88,95 +117,508 @@
 
             <article class="visualization-article">
                  <h2 class="visualization-title">Community Context within Buffer Zones</h2>
-                 
-        
-            
-
                  <div class="map">
                      <img src="img/buffer_popden.jpg" alt="Map of population density in buffer zones" class="map-image">
                  </div>
-
                   <div class="map">
                      <img src="img/buffer_pop.png" alt="Bar Chart of Total Population in buffer zones" class="map-image">
                  </div> 
-
                  <hr class="content-divider-minor">
-
                  <div class="analysis-text">
                      <p><em>Within a 1.5km radius, Mill Pond's surrounding area supports a larger population of 22,417 compared to 15,952 around Stump Pond. This difference is reflected in land use, with Mill Pond having slightly more developed parcels (1,043 vs. 994). The population density map further illustrates higher concentrations of residents near Mill Pond.</em></p>
                  </div>
-
                  <hr class="content-divider-minor">
-
                  <div class="pie-chart-container">
                      <div class="chart-container pie-chart">
                          <div id="millPondLandUseChart"></div>
-                         <h3 class="text-center">Mill Pond Buffer Land Use (2016)</h3>
                      </div>
-
                      <div class="chart-container pie-chart">
                          <div id="stumpPondLandUseChart"></div>
-                         <h3 class="text-center">Stump Pond Buffer Land Use (2016)</h3>
                      </div>
-
-                 <!-- <div class="chart-container pie-chart">
-                        <div id="millPondLandUseChart"></div>
-                 </div> -->
-
-                  <!--<div class="table-container">
-                     <h3 class="text-center">Land Use Legend</h3>
-                     <table id="landUseTable" class="styled-table">
-                         <thead><tr><th>Code</th><th>Land Use Type</th><th>Color</th></tr></thead>
-                         <tbody></tbody>
-                     </table>
-                  </div> -->
-
-                  <!--<div class="analysis-text">
-                     <p>Breakdown of land use types within the buffer zones.</p>
-                     <p><em>[Add land use analysis.]</em></p>
-                 </div> -->
-
-                <!--<hr class="content-divider-minor">
-                 <div class="chart-container">
-                    <canvas id="parcelCountBarChart"></canvas>
-                    <h3 class="text-center">Parcel Counts by Land Use Type</h3>
                  </div>
-                  <div class="analysis-text">
-                     <p>Number of parcels per land use type within the buffer zones.</p>
-                      <p><em>[Add parcel count analysis.]</em></p>
-                  </div>
             </article>
-             <hr class="content-divider"> -->
+
+            <hr class="content-divider">
 
              <article class="visualization-article">
                 <h2 class="visualization-title">Real Estate Market Trends (Mar 2024 - Mar 2025)</h2>
                 <div class="chart-container">
-                    <div id="medianSalePriceChart"></div>  <h3 class="text-center">Median Sale Price</h3>
+                    <div id="medianSalePriceChart"></div>
                 </div>
-                <div class="analysis-text">
-                    </div>
                 <hr class="content-divider-minor">
                  <div class="chart-container">
-                    <div id="homesSoldChart"></div>   <h3 class="text-center">Homes Sold</h3>
+                    <div id="homesSoldChart"></div>
                 </div>
-                 <div class="analysis-text">
-                    </div>
                 <hr class="content-divider-minor">
                 <div class="chart-container">
-                    <div id="inventoryChart"></div>   <h3 class="text-center">Housing Inventory</h3>
+                    <div id="inventoryChart"></div>
                 </div>
-                <div class="analysis-text">
-                    </div>
             </article>
-
         </section>
     </main>
 
     <footer class="site-footer-bottom">
-         </footer>
+        <div class="container">
+            <div class="footer-nav">
+                <a href="about.html">About Us</a> |
+                <a href="contact.html">Contact</a> |
+                <a href="privacy.html">Privacy Policy</a>
+            </div>
+            <p>&copy; <span id="currentYear"></span> Suffolk Ponds Initiative. All Rights Reserved.</p>
+            <p class="disclaimer">This website is a community information resource for Suffolk County's Mill Pond (Stony Brook) and Stump Pond (Smithtown).</p>
+        </div>
+    </footer>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="visualizations.js"></script>
-    <script src="script.js"></script> </body>
+    <script src="https://unpkg.com/esri-leaflet@3.0.10/dist/esri-leaflet.js" integrity="sha512-i9mZ/0lnBMdKZjkVQXImtZbWzrhomyyQzXarfT4ki1eD/Bi+rcV4lFyzX52lbRQtqj070JQea4p8QNCMrHzuYg==" crossorigin=""></script>
+    <script src='https://unpkg.com/@turf/turf@6/turf.min.js'></script>
+    
+    <script>
+        // All JavaScript code from leaflet.html's script tag goes here directly
+        console.log("Map script started (integrated into visualizations.html).");
+
+        if (window.location.protocol === "file:") {
+            const noticeContainer = document.getElementById('server-notice-container');
+            if (noticeContainer) {
+                noticeContainer.innerHTML = `
+                    <div style="padding: 10px; background-color: #fffbe6; border: 1px solid #ffe58f; text-align: center; font-family: sans-serif; font-size: 14px; color: #8a6d3b; margin-bottom:10px;">
+                        <strong>Note:</strong> Some map layers (like ArcGIS services) may not load correctly when viewing this page directly from your local file system (<code>file:///</code> protocol).
+                        For best results, please view this page via a local web server (e.g., using VS Code's Live Server, Python's <code>http.server</code>, or by deploying to a web host).
+                    </div>`;
+            } else {
+                console.warn("Server notice container 'server-notice-container' not found.");
+            }
+        }
+
+
+        if (typeof L === 'undefined') { 
+            console.error("Leaflet library (L) is not loaded. The map will not work.");
+            const mapDiv = document.getElementById('map');
+            if(mapDiv) mapDiv.innerHTML = "<p style='color:red; text-align:center; padding:20px;'>Error: Leaflet library not loaded. Map cannot be displayed.</p>";
+        }
+        else {
+            console.log("Leaflet library (L) loaded.");
+            if (typeof turf === 'undefined') { console.error("Turf.js library not loaded."); } 
+            else { console.log("Turf.js library loaded."); }
+            
+            const mapElement = document.getElementById('map');
+            if (!mapElement) { console.error("Map container element with ID 'map' not found."); }
+            else {
+                console.log("Map container element #map found.");
+
+                const osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors', zIndex: 1 });
+                const esriWorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community', zIndex: 1 });
+                const esriHillshade = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Shaded_Relief/MapServer/tile/{z}/{y}/{x}', { attribution: 'Tiles &copy; Esri &mdash; Source: Esri', maxZoom: 13, zIndex: 1 });
+                
+                const map = L.map('map', { layers: [esriHillshade], tap: false }).setView([40.9, -72.9], 10); 
+                console.log("Leaflet map object initialized.");
+                L.control.scale({position: 'bottomleft', metric: true, imperial: false}).addTo(map);
+
+                map.on('click', function(e) {
+                    console.log('Map clicked at: ', e.latlng);
+                });
+
+                map.createPane('vectorOverlaysPane'); map.getPane('vectorOverlaysPane').style.zIndex = 420;
+                map.createPane('populationDensityPane'); map.getPane('populationDensityPane').style.zIndex = 425;
+                map.createPane('pondBuffersPane');    map.getPane('pondBuffersPane').style.zIndex = 430; 
+                map.createPane('pondsPane');          map.getPane('pondsPane').style.zIndex = 440;
+                map.createPane('landUseServicePane'); map.getPane('landUseServicePane').style.zIndex = 415; 
+
+                let femaLayer, coastalRiskLayer, landUse2016ServiceLayer; 
+                const landUseServiceUrl = 'https://gis.suffolkcountyny.gov/image/rest/services/Basemaps/LandUse2016/MapServer';
+                
+                let loadingOperations = 0;
+                // mapLoader is now a child of #map, so it will be found when map is initialized
+                const mapLoader = document.getElementById('map-loader'); 
+                function showLoader() {
+                    loadingOperations++;
+                    if (mapLoader) mapLoader.style.display = 'block';
+                }
+                function hideLoader() {
+                    loadingOperations--;
+                    if (loadingOperations <= 0) {
+                        if (mapLoader) mapLoader.style.display = 'none';
+                        loadingOperations = 0; 
+                    }
+                }
+
+                if (typeof L.esri === 'undefined') { 
+                    console.error("Esri Leaflet library not loaded. ArcGIS services may not work."); 
+                } else { 
+                    console.log("Esri Leaflet library (L.esri) loaded.");
+                    
+                    const arcgisImageServerUrl = 'https://elevation.its.ny.gov/arcgis/rest/services/FEMA_Suffolk2006_2_meter/ImageServer';
+                    femaLayer = L.esri.imageMapLayer({ url: arcgisImageServerUrl, opacity: 0.70, attribution: 'NYS ITS, FEMA', zIndex: 2 }); 
+                    femaLayer.on('loading', showLoader).on('load', hideLoader).on('error', (e) => { hideLoader(); console.error('Error loading FEMA Elevation layer:', e); });
+
+                    const coastalRiskUrl = 'https://tiles.arcgis.com/tiles/okXm0pb6aWH6XOGI/arcgis/rest/services/Coastal_Risk_Areas_Downstate_NY/MapServer';
+                    coastalRiskLayer = L.esri.tiledMapLayer({ url: coastalRiskUrl, opacity: 0.65, attribution: 'NYS DEC, NOAA, USACE, FEMA', zIndex: 3 }); 
+                    coastalRiskLayer.on('loading', showLoader).on('load', hideLoader).on('error', (e) => { hideLoader(); console.error('Error loading Coastal Risk Areas layer:', e); });
+                    
+                    landUse2016ServiceLayer = L.esri.dynamicMapLayer({ url: landUseServiceUrl, layers: [0], opacity: 0.7, attribution: 'Suffolk County GIS', pane: 'landUseServicePane' }); 
+                    landUse2016ServiceLayer.on('loading', showLoader).on('load', hideLoader).on('error', (e) => { hideLoader(); console.error('Error loading Land Use 2016 Service layer:', e); });
+                }
+
+                const baseMaps = { 
+                    "Hillshade": esriHillshade, 
+                    "Satellite Imagery": esriWorldImagery, 
+                    "OpenStreetMap": osm 
+                };
+                const overlayMaps = {}; 
+                if (femaLayer) { overlayMaps["FEMA Elevation (2006 DEM)"] = femaLayer; }
+                if (coastalRiskLayer) { overlayMaps["Coastal Risk Areas"] = coastalRiskLayer; }
+                if (landUse2016ServiceLayer) { overlayMaps["Land Use (2016 Service)"] = landUse2016ServiceLayer; }
+
+                const POPDENSITY_PROPERTY = 'POPDENSITY'; 
+                function getDensityColor(density) { 
+                    if (density === undefined || density === null || density < 0) return '#CCCCCC'; 
+                    if (density > 5000) return '#084594'; if (density > 2500) return '#2171b5';
+                    if (density > 1000) return '#4292c6'; if (density > 500)  return '#6baed6';
+                    if (density > 200)  return '#9ecae1'; if (density > 50)   return '#c6dbef';
+                    if (density > 0)    return '#eff3ff'; return '#f7f7f7'; 
+                }
+                const densityGrades = [0, 50, 200, 500, 1000, 2500, 5000];
+                const POND_BUFFER_DISTANCE = 1.5; 
+                const POND_BUFFER_STYLE = { fillColor: "#56B4E9", color: "#0072B2", weight: 2.5, fillOpacity: 0 }; 
+                const POND_NAMES_FOR_BUFFERING_AND_LABELS = ["Mill Pond Dam", "Stump Pond Dam"]; 
+                const HIGHLIGHT_STYLE = { weight: 3, color: '#FFD700', dashArray: '', fillOpacity: 0.5 }; 
+
+                function styleGeoJson(feature, layer, layerName, layerColor) {
+                    let style = { weight: 1.5, opacity: 0.9, fillOpacity: 0.70 }; 
+
+                    if (layerName === "Population Density") {
+                        const density = feature.properties[POPDENSITY_PROPERTY];
+                        style.fillColor = getDensityColor(density); style.color = "#444"; style.weight = 0.6; 
+                    } else if (layerName === "Towns") {
+                        style.color = layerColor; style.fillOpacity = 0; style.weight = 2.2; 
+                    } else if (POND_NAMES_FOR_BUFFERING_AND_LABELS.includes(layerName)) { 
+                        style.color = layerColor; style.fillColor = layerColor; style.fillOpacity = 0.65; 
+                    } else if (layerName.endsWith(" Buffer")) { 
+                        Object.assign(style, POND_BUFFER_STYLE);
+                    } else { 
+                        style.color = layerColor; style.fillColor = layerColor; style.fillOpacity = 0.55;
+                    }
+                    
+                    if (feature.properties && layer) { 
+                        let popupContent = ''; let title = 'Feature Details'; 
+                        let labelText = null; 
+
+                        if (layerName === "Towns" && feature.properties.LABEL) {
+                            title = String(feature.properties.LABEL); labelText = title; 
+                        } else if (POND_NAMES_FOR_BUFFERING_AND_LABELS.includes(layerName)) {
+                            labelText = layerName; 
+                            title = layerName; 
+                            const pondNameProperties = ['name', 'POND_NAME', 'FEATURE_NA', 'LABEL'];
+                            for (const prop of pondNameProperties) { if (feature.properties[prop]) { title = String(feature.properties[prop]); break; } }
+                        } else { 
+                            const nameProperties = ['name', 'Name', 'NAME', 'TOWN', 'TRACT_NAME', 'WATERSHED_NAME', 'FEATURE_NA'];
+                            for (const prop of nameProperties) { if (feature.properties[prop]) { title = String(feature.properties[prop]); break; } }
+                        }
+                        popupContent += `<strong>${title}</strong>`;
+                        for (const key in feature.properties) {
+                            if (Object.hasOwnProperty.call(feature.properties, key) && String(feature.properties[key]) !== title && 
+                                !(key === 'LABEL' && layerName === "Towns") && 
+                                !(POND_NAMES_FOR_BUFFERING_AND_LABELS.includes(layerName) && (key === 'name' || key === 'POND_NAME' || key === 'FEATURE_NA' || key === 'LABEL' ))) { 
+                                 popupContent += `<em>${key}:</em> ${feature.properties[key]}<br>`;
+                            }
+                        }
+                        if (popupContent.endsWith('<br>')) { popupContent = popupContent.slice(0, -4); }
+                        layer.bindPopup(popupContent);
+
+                        if (labelText) { 
+                            let tooltipClassName = (layerName === "Towns") ? 'town-label' : (POND_NAMES_FOR_BUFFERING_AND_LABELS.includes(layerName) ? 'pond-label' : '');
+                            if (tooltipClassName) { layer.bindTooltip(labelText, { permanent: true, direction: 'center', className: tooltipClassName, opacity: 0.85 }); }
+                        }
+                        
+                        layer.on({
+                            mouseover: function (e) {
+                                const targetLayer = e.target;
+                                if (typeof targetLayer.setStyle === 'function') { targetLayer.setStyle(HIGHLIGHT_STYLE); }
+                                if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge && typeof targetLayer.bringToFront === 'function') { targetLayer.bringToFront(); }
+                            },
+                            mouseout: function (e) {
+                                if (typeof e.target.setStyle === 'function') { e.target.setStyle(styleGeoJson(e.target.feature, null, layerName, layerColor)); }
+                            }
+                        });
+                    }
+                    if (feature.geometry && feature.geometry.type === "Point") { 
+                        return { radius: 6, fillColor: layerColor || "#ff7800", color: "#000", weight: 1, opacity: 1, fillOpacity: 0.8 };
+                    }
+                    return style;
+                }
+                
+                const geoJsonFiles = [ 
+                    { name: "Population Density", path: "data/Census_Tracts.geojson", color: null, pane: 'populationDensityPane', onByDefault: true }, 
+                    { name: "Towns", path: "data/Towns.geojson", color: "#000000", pane: 'vectorOverlaysPane' }, 
+                    { name: "Mill Pond Dam", path: "data/Mill_Pond.geojson", color: "#6a3d9a", pane: 'pondsPane' }, 
+                    { name: "Stump Pond Dam", path: "data/Stump_Pond.geojson", color: "#ff7f00", pane: 'pondsPane' }, 
+                    { name: "Watersheds", path: "data/Watersheds.geojson", color: "#b3de69", pane: 'vectorOverlaysPane' } 
+                ];
+
+                async function addGeoJsonLayer(mapInstance, layerName, filePath, layerColor, targetPane, onByDefault = false) {
+                    showLoader(); 
+                    console.log(`Attempting to load GeoJSON: ${layerName} from ${filePath}`);
+                    try {
+                        const response = await fetch(filePath);
+                        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status} for ${filePath}`);
+                        const geoJsonData = await response.json();
+                        console.log(`Successfully parsed JSON for ${layerName}`);
+                        
+                        const layerOptions = {
+                            style: (feature) => styleGeoJson(feature, null, layerName, layerColor), 
+                            onEachFeature: (feature, layer) => { styleGeoJson(feature, layer, layerName, layerColor); }, 
+                            pointToLayer: (feature, latlng) => L.circleMarker(latlng, { radius: 6, fillColor: layerColor || "#ff7800", color: "#000", weight: 1, opacity: 1, fillOpacity: 0.8 }),
+                            pane: targetPane 
+                        };
+
+                        const geoJsonLayer = L.geoJSON(geoJsonData, layerOptions);
+                        if (onByDefault) { geoJsonLayer.addTo(mapInstance); }
+                        overlayMaps[layerName] = geoJsonLayer; 
+                        console.log(`${layerName} added to pane: ${targetPane}. On by default: ${onByDefault}`);
+
+                        if (POND_NAMES_FOR_BUFFERING_AND_LABELS.includes(layerName) && typeof turf !== 'undefined') {
+                            const bufferedFeatures = geoJsonData.features.map(feature => {
+                                if (feature.geometry && feature.geometry.coordinates) {
+                                    try { return turf.buffer(feature, POND_BUFFER_DISTANCE, { units: 'kilometers' }); }
+                                    catch (bufferError) { console.error(`Error buffering feature in ${layerName}:`, feature, bufferError); return null; }
+                                } return null;
+                            }).filter(Boolean); 
+
+                            if (bufferedFeatures.length > 0) {
+                                const bufferLayerName = `${layerName} Buffer`;
+                                const bufferLayer = L.geoJSON({ type: "FeatureCollection", features: bufferedFeatures }, {
+                                    style: (feature) => styleGeoJson(feature, null, bufferLayerName, null), 
+                                    pane: 'pondBuffersPane' 
+                                });
+                                overlayMaps[bufferLayerName] = bufferLayer; 
+                                console.log(`${bufferLayerName} created. Off by default.`);
+                            }
+                        }
+                    } catch (error) { console.error(`Error loading ${layerName}: ${error.message}`); }
+                    finally { hideLoader(); } 
+                }
+
+                const legend = L.control({position: 'bottomright'});
+legend.onAdd = function (map) {
+    const container = L.DomUtil.create('div', 'legend');
+    const header = L.DomUtil.create('div', 'legend-header', container);
+    // Correct initial icon: Legend starts collapsed, so icon is '▼'
+    header.innerHTML = 'Legend <span class="legend-toggle-icon">▼</span>';
+
+    const content = L.DomUtil.create('div', 'legend-content', container);
+    L.DomUtil.addClass(content, 'collapsed'); // Start legend collapsed
+
+    let legendHtml = ''; // Initialize an empty string to build HTML
+
+    // Population Density Legend
+    legendHtml += '<h4>Population Density</h4><span class="legend-subtitle">(people / km²)</span>';
+    // Ensure densityGrades and getDensityColor are available and correct
+    if (typeof densityGrades !== 'undefined' && typeof getDensityColor === 'function') {
+        for (let i = 0; i < densityGrades.length; i++) {
+            const from = densityGrades[i];
+            const to = densityGrades[i + 1];
+            legendHtml += `<div class="legend-item"><i style="background:${getDensityColor(from + (from === 0 ? 0 : 1))}"></i><span class="legend-text">${from + (to ? '&ndash;' + to : '+')}</span><button class="zoom-to-layer-btn" data-layername="Population Density">Zoom</button></div>`;
+        }
+    } else {
+        legendHtml += '<p>Error: Population density data unavailable.</p>';
+    }
+
+
+    // Vector Layers Legend
+    legendHtml += '<h4>Vector Layers</h4>';
+    // Ensure geoJsonFiles, POND_NAMES_FOR_BUFFERING_AND_LABELS, POND_BUFFER_STYLE are available
+    if (typeof geoJsonFiles !== 'undefined' && Array.isArray(geoJsonFiles)) {
+        geoJsonFiles.forEach(function(file) {
+            if (!file || file.name === "Population Density") return;
+
+            let legendStyle = `background:${file.color || '#dddddd'}; opacity: 0.55;`; // Fallback color
+            let legendText = file.name || 'Unnamed Layer'; // Fallback name
+
+            if (file.name === "Towns") {
+                legendStyle = `background: transparent; border: 2.2px solid ${file.color || '#000000'};`;
+                legendText += " (Outlines)";
+            } else if (typeof POND_NAMES_FOR_BUFFERING_AND_LABELS !== 'undefined' && POND_NAMES_FOR_BUFFERING_AND_LABELS.includes(file.name)) {
+                 legendStyle = `background:${file.color || '#dddddd'}; opacity: 0.65;`;
+            }
+            
+            legendHtml += `<div class="legend-item"><div class="legend-item-main"><i style="${legendStyle}"></i><span class="legend-text">${legendText}</span></div><button class="zoom-to-layer-btn" data-layername="${file.name || ''}">Zoom</button></div>`;
+            
+            if (typeof POND_NAMES_FOR_BUFFERING_AND_LABELS !== 'undefined' && POND_NAMES_FOR_BUFFERING_AND_LABELS.includes(file.name)) {
+                const bufferLayerName = `${file.name} Buffer`;
+                const bufferColor = (typeof POND_BUFFER_STYLE !== 'undefined' && POND_BUFFER_STYLE.color) ? POND_BUFFER_STYLE.color : '#0072B2'; // Fallback
+                const bufferLegendStyle = `background: transparent; border: 2.5px solid ${bufferColor}; opacity:1;`;
+                legendHtml += `<div class="legend-item"><div class="legend-item-main"><i style="${bufferLegendStyle}"></i><span class="legend-text">${bufferLayerName}</span></div><button class="zoom-to-layer-btn" data-layername="${bufferLayerName}">Zoom</button></div>`;
+            }
+        });
+    }  else {
+        legendHtml += '<p>Error: Vector layer data unavailable.</p>';
+    }
+
+    // Service Layers Legend
+    legendHtml += '<h4>Service Layers</h4>';
+    if (typeof femaLayer !== 'undefined' && femaLayer) {
+        legendHtml += '<div class="legend-item"><i class="arcgis-legend-item"></i><span class="legend-text">FEMA Elevation (DEM)</span></div>';
+    }
+    if (typeof coastalRiskLayer !== 'undefined' && coastalRiskLayer) {
+        legendHtml += '<div class="legend-item"><i class="arcgis-legend-item"></i><span class="legend-text">Coastal Risk Areas</span></div>';
+    }
+    // The landUse2016ServiceLayer part will be populated asynchronously if the layer exists
+    if (typeof landUse2016ServiceLayer !== 'undefined' && landUse2016ServiceLayer) {
+        legendHtml += '<div id="landUseLegendDiv"><h4>Land Use (2016 Service)</h4><span class="legend-subtitle">Loading Land Use Legend...</span></div>';
+    }
+
+    content.innerHTML = legendHtml; // Set the built HTML string to the content div once
+
+    // Single, correct event listener for toggling
+    L.DomEvent.on(header, 'click', function() {
+        const currentToggleIcon = header.querySelector('.legend-toggle-icon');
+        if (L.DomUtil.hasClass(content, 'collapsed')) { // Is currently collapsed, will expand
+            L.DomUtil.removeClass(content, 'collapsed');
+            if(currentToggleIcon) currentToggleIcon.innerHTML = '▲'; // Expanded icon
+        } else { // Is currently expanded, will collapse
+            L.DomUtil.addClass(content, 'collapsed');
+            if(currentToggleIcon) currentToggleIcon.innerHTML = '▼'; // Collapsed icon
+        }
+    });
+
+    // Event listener for zoom buttons (delegated)
+    L.DomEvent.on(content, 'click', function(ev) {
+        const target = ev.target || ev.srcElement;
+        if (L.DomUtil.hasClass(target, 'zoom-to-layer-btn')) {
+            const layerName = target.getAttribute('data-layername');
+            if (layerName && typeof overlayMaps !== 'undefined' && overlayMaps[layerName]) { // Check overlayMaps
+                const layerToZoom = overlayMaps[layerName];
+                if (typeof layerToZoom.getBounds === 'function' && Object.keys(layerToZoom.getBounds()).length > 0 ) {
+                    try { map.fitBounds(layerToZoom.getBounds()); } catch (e) { console.error("Error fitting bounds for " + layerName, e, layerToZoom.getBounds());}
+                } else { console.warn(`Layer ${layerName} does not have valid bounds or getBounds method.`); }
+            } else {
+                 console.warn(`Zoom button clicked for unknown layer or undefined overlayMaps: ${layerName}`);
+            }
+        }
+    });
+    return container;
+};
+                
+                async function addLandUseLegend(serviceUrl, layerId = 0) {
+                    const legendUrl = `${serviceUrl}/legend?f=pjson`;
+                    const landUseLegendDiv = document.getElementById('landUseLegendDiv');
+
+                    if (!landUseLegendDiv) {
+                        console.error("Land Use legend container ('landUseLegendDiv') not found in DOM when addLandUseLegend was called.");
+                        return;
+                    }
+                    landUseLegendDiv.innerHTML = '<h4>Land Use (2016 Service)</h4><span class="legend-subtitle">Fetching legend...</span>'; 
+                    console.log(`Workspaceing Land Use legend from: ${legendUrl}`);
+
+                    try {
+                        const response = await fetch(legendUrl);
+                        console.log(`Land Use legend fetch response status: ${response.status}`);
+                        if (!response.ok) {
+                            throw new Error(`HTTP error fetching legend! status: ${response.status}`);
+                        }
+                        const legendData = await response.json();
+                        console.log("Land Use legend data received:", legendData);
+
+                        let htmlContent = ''; 
+                        const targetLayerLegend = legendData.layers.find(l => l.layerId === layerId);
+
+                        if (targetLayerLegend && targetLayerLegend.legend && targetLayerLegend.legend.length > 0) {
+                            targetLayerLegend.legend.forEach(item => {
+                                if (item.label && item.contentType && item.imageData) { 
+                                    htmlContent += `<div class="legend-item">
+                                                      <img src="data:${item.contentType};base64,${item.imageData}" alt="${item.label}" class="legend-swatch-image">
+                                                      <span class="legend-text">${item.label}</span>
+                                                   </div>`;
+                                } else {
+                                    console.warn("Skipping legend item due to missing properties:", item);
+                                }
+                            });
+                            if (htmlContent === '') { 
+                                 landUseLegendDiv.innerHTML = '<h4>Land Use (2016 Service)</h4><span class="legend-subtitle">No valid legend items found.</span>';
+                            } else {
+                                 landUseLegendDiv.innerHTML = '<h4>Land Use (2016 Service)</h4>' + htmlContent; 
+                            }
+                        } else {
+                            landUseLegendDiv.innerHTML = '<h4>Land Use (2016 Service)</h4><span class="legend-subtitle">Legend data not found for layer ' + layerId + '.</span>';
+                        }
+                        console.log("Land Use legend populated.");
+
+                    } catch (error) {
+                        console.error("Error fetching or building Land Use legend:", error);
+                        landUseLegendDiv.innerHTML = `<h4>Land Use (2016 Service)</h4><span class="legend-subtitle">Error loading legend: ${error.message}</span>`;
+                    }
+                }
+
+
+                async function loadAllGeoJsonAndInitControl() {
+                    console.log("Starting to load all GeoJSON files...");
+                    const loadPromises = geoJsonFiles.map(fileInfo =>
+                        addGeoJsonLayer(map, fileInfo.name, fileInfo.path, fileInfo.color, fileInfo.pane, fileInfo.onByDefault) 
+                    );
+                    await Promise.allSettled(loadPromises); 
+                    console.log("All GeoJSON loading attempts finished.");
+
+                    const layerControl = L.control.layers(baseMaps, overlayMaps, { collapsed: true }); 
+                    // The customLayerControlContainer is now a child of #map
+                    const customLayerControlContainer = document.getElementById('customLayerControl'); 
+                    const layerControlHeader = customLayerControlContainer.querySelector('.layer-control-header');
+                    const layerControlToggleIcon = layerControlHeader.querySelector('.layer-control-toggle-icon');
+                    const layerControlHost = customLayerControlContainer.querySelector('.leaflet-control-layers-host');
+                    
+                    if (customLayerControlContainer && layerControlHeader && layerControlHost) {
+                        layerControl.addTo(map); 
+                        layerControlHost.appendChild(layerControl.getContainer()); 
+                        layerControlToggleIcon.innerHTML = '▶'; 
+
+                        L.DomEvent.on(layerControlHeader, 'click', function() {
+                            if (L.DomUtil.hasClass(layerControlHost, 'collapsed-control')) {
+                                L.DomUtil.removeClass(layerControlHost, 'collapsed-control');
+                                layerControlToggleIcon.innerHTML = '▼';
+                            } else {
+                                L.DomUtil.addClass(layerControlHost, 'collapsed-control');
+                                layerControlToggleIcon.innerHTML = '▶';
+                            }
+                        });
+                    } else {
+                        console.error("Custom layer control container parts not found. Using default Leaflet layer control.");
+                        L.control.layers(baseMaps, overlayMaps, { collapsed: false, position: 'topright' }).addTo(map); 
+                    }
+                    
+                    console.log("Layer control added/updated.");
+                    legend.addTo(map); 
+                    console.log("Main legend structure added.");
+
+                    if (landUse2016ServiceLayer) { addLandUseLegend(landUseServiceUrl, 0); }
+
+                    // The infoBox is now a child of #map
+                    const infoBoxHeader = document.getElementById('infoBoxHeader');
+                    const infoBoxContent = document.getElementById('infoBoxContent');
+                    // The toggle icon is inside infoBoxHeader
+                    const infoBoxToggleIcon = infoBoxHeader ? infoBoxHeader.querySelector('.info-box-toggle-icon') : null; 
+
+                    if (infoBoxHeader && infoBoxContent && infoBoxToggleIcon) {
+                        L.DomEvent.on(infoBoxHeader, 'click', function() { 
+                            if (L.DomUtil.hasClass(infoBoxContent, 'collapsed')) {
+                                L.DomUtil.removeClass(infoBoxContent, 'collapsed');
+                                infoBoxToggleIcon.innerHTML = '▼';
+                            } else {
+                                L.DomUtil.addClass(infoBoxContent, 'collapsed');
+                                infoBoxToggleIcon.innerHTML = '▶';
+                            }
+                        });
+                    } else {
+                        if (!infoBoxHeader) console.error("Info box header 'infoBoxHeader' not found.");
+                        if (!infoBoxContent) console.error("Info box content 'infoBoxContent' not found.");
+                        if (!infoBoxToggleIcon) console.error("Info box toggle icon not found.");
+                    }
+                }
+                loadAllGeoJsonAndInitControl(); 
+            } 
+        } 
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> 
+    <script src="visualizations.js"></script> 
+    <script src="script.js"></script> 
+</body>
 </html>

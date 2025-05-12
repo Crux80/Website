@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "Stump_Pond",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "STATE_ID": "250-0430", "FEDERAL_ID": "NY01516", "QUAD": "C", "NAME_ONE": "New Mill Pond Dam", "NAME_TWO": null, "COUNTY_NAM": "Suffolk", "REGION_NAM": "1", "HAZARD_COD": "A", "PHASE1_INS": "None", "SCS": "N", "BASIN_NAME": "LONG ISLAND", "RIVER_STRE": "NORTHEAST BRANCH", "NEAREST_CI": "Smithtown", "NEAREST__1": 2.0, "DAM_HEIGHT": 15.0, "DIKE_LENGT": 0.0, "DAM_LENGTH": 465.0, "MAX_DISCHA": 0.0, "NORMAL_STO": 308.0, "MAX_STORAG": 545.0, "SURFACE_AR": 109.0, "DRAINAGE_A": 23.02, "LATITUDE_D": 40.0, "LATITUDE_M": 50.0, "LATITUDE_S": 34.0, "LONGITUDE_": 73.0, "LONGITUDE1": 13.0, "LONGITUD_1": 41.0, "SPILLWAY_T": "Uncontrolled Overflow with flasboards", "SPILLWAY_1": "None", "SPILLWAY_W": 18.0, "EAP_STATUS": "None", "EAP_DOCUME": "1899-12-30", "EAP_LAST_E": "1899-12-30", "EAP_REQUIR": "N", "YEARBUILT": 1825.0, "CONSTRUCTI": "RE - Earth", "MUNICIPALI": "Town of Smithtown", "OWNERS": "SUFFOLK COUNTY DEPARTMENT OF PUBLIC WORKS", "OWNERTYPE": "Local Government", "PURPOSES": "Recreation", "LASTINSPEC": "10/14/2011", "FERC_STATU": null, "FERC_NUM": null, "LATESTANNU": "Not Found", "ENG_ASSESS": "1899-12-30", "LASTCONDIT": "Not Rated", "LAST_MODIF": "2009-07-06", "LON_DD": -73.22805556, "LAT_DD": 40.84277778, "HAZARD_TEX": "Low Hazard Dam", "MOREINFO": "https://dec.ny.gov/environmental-protection/water/water-quantity/dam-safety-coastal-flood-protection/dam-safety" }, "geometry": { "type": "Point", "coordinates": [ -73.228055258574202, 40.842776664439654 ] } }
+]
+}

@@ -115,7 +115,7 @@ hr.content-divider-minor {
     box-shadow: 0 2px 10px rgba(0,0,0,0.08);
     position: sticky;
     top: 0;
-    z-index: 1000;
+    z-index: 3000; /* Keep header z-index lower than map overlays if they are viewport relative, but higher than page content */
     border-bottom: 3px solid var(--primary-color);
 }
 .header-flex { display: flex; justify-content: space-between; align-items: center; }
@@ -249,72 +249,40 @@ hr.content-divider-minor {
 .content-article section::after { content: ""; display: table; clear: both; } /* Clear floats */
 
 /* === ADD THESE NEW STYLES FOR THE HISTORY SECTION LAYOUT === */
-
-/* Optional: Style the main heading of the history section if needed */
 #history h2 {
     text-align: center;
-    margin-bottom: 25px; /* Adjust spacing as you like */
+    margin-bottom: 25px;
 }
-
-/* This is the new Flexbox container that will wrap your two columns */
 .history-layout-container {
-    display: flex;          /* Enables Flexbox layout */
-    flex-wrap: wrap;        /* Allows columns to stack on smaller screens */
-    gap: 30px;              /* Creates space (gutter) between the columns */
-    align-items: flex-start; /* Aligns the top of the columns with each other.
-                                 Other options: 'stretch' (to make columns equal height if they have backgrounds/borders),
-                                 'center' (to center them vertically relative to each other). */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    align-items: flex-start;
 }
-
-/* This is the style for each individual column (Stump Pond info, Mill Pond info) */
 .history-column {
-    flex: 1;                /* Allows each column to grow and shrink equally to share space.
-                                 If you want one column wider than the other, you could use 'flex-grow' differently,
-                                 or set specific flex-basis percentages. For two equal columns, 'flex: 1' is common. */
-    min-width: 300px;       /* A good practice: prevents columns from becoming too narrow
-                                 on medium screens before they wrap or stack. Adjust this value as needed.
-                                 For example, if you want them to stack sooner, make this value larger. */
+    flex: 1;
+    min-width: 300px;
 }
-
-/*
-   Your existing styles for 'figure', 'figure img', and 'figcaption'
-   within '.content-article' will likely still apply.
-   However, for images directly within '.history-column figure',
-   ensure they are responsive and don't break the column layout.
-*/
 .history-column figure img {
-    max-width: 100%;        /* Makes sure the image doesn't overflow its column */
-    height: auto;           /* Maintains the image's aspect ratio */
-    display: block;         /* Removes extra space below the image if it's an inline element */
-    /* Your existing border-radius and box-shadow for images will still be inherited if specific enough,
-       or you can re-declare them here if needed: */
-    /* border-radius: var(--border-radius); */
-    /* box-shadow: 0 2px 8px rgba(0,0,0,0.1); */
+    max-width: 100%;
+    height: auto;
+    display: block;
 }
-
-/*
-   Optional: If headings (h3) are the very first element in a column,
-   you might want to remove their default top margin.
-*/
 .history-column h3:first-child {
     margin-top: 0;
 }
-
-/* Responsive adjustments for smaller screens */
-@media (max-width: 768px) { /* Adjust this breakpoint (768px) as needed */
+@media (max-width: 768px) {
     .history-layout-container {
-        flex-direction: column; /* Stacks the columns vertically */
+        flex-direction: column;
     }
     .history-column {
-        min-width: 100%;       /* Allows each column to take the full width when stacked */
-                               /* (or 'min-width: unset;' if you want it to behave more like a normal block) */
-        margin-bottom: 30px;   /* Adds space between the stacked columns */
+        min-width: 100%;
+        margin-bottom: 30px;
     }
     .history-column:last-child {
-        margin-bottom: 0;      /* Removes margin from the last stacked item */
+        margin-bottom: 0;
     }
 }
-
 /* === END OF NEW STYLES FOR HISTORY SECTION LAYOUT === */
 
 /* --- Gallery Page --- */
@@ -338,18 +306,17 @@ hr.content-divider-minor {
 .map-container { width: 100%; height: 500px; background-color: #e9e9e9; border-radius: var(--border-radius); margin-bottom: 20px; border: 1px solid var(--border-color); }
 .map-container p { line-height: 450px; text-align: center; color: var(--muted-text); } /* Placeholder text */
 .map-image {
-    display: block;         /* Behaves like a block, good for sizing and margin */
-    max-width: 64.5%;         /* Example: Image will take up to 80% of the container's width. Adjust as needed. */
-                            /* Or use a pixel value like: max-width: 600px; */
-    height: auto;           /* Maintains the image's aspect ratio */
-    margin-left: auto;      /* Centers the image horizontally if it's narrower than the container */
-    margin-right: auto;     /* Centers the image horizontally */
+    display: block;
+    max-width: 64.5%;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
 }
 .chart-container { width: 100%; max-width: 800px; margin: 20px auto; padding: 15px; background-color: var(--bg-light); border-radius: var(--border-radius); box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
 .chart-container canvas { width: 100% !important; height: auto !important; } /* Ensure canvas is responsive */
 .chart-container h3 { text-align: center; font-size: 1.2rem; margin-top: 10px; color: var(--dark-text); }
 .pie-chart-container { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 20px; }
-.pie-chart { max-width: 1000px; }
+.pie-chart { max-width: 1000px; } /* Was 450px, increased for better display if needed */
 .analysis-text { margin-top: 15px; }
 .analysis-text h3 { font-size: 1.4rem; color: var(--dark-text); margin-bottom: 10px; }
 .analysis-text p, .analysis-text ul { font-size: 0.95rem; line-height: 1.6; color: var(--muted-text); }
@@ -364,24 +331,22 @@ hr.content-divider-minor {
 .color-box { display: inline-block; width: 15px; height: 15px; margin-right: 5px; border: 1px solid #ccc; vertical-align: middle; }
 
 @media (max-width: 768px) {
-  .chart-container {
+  .chart-container { /* For Plotly charts */
     position: relative;
     width: 100% !important;
     max-width: 100% !important;
-    height: 400px; /* Give the Plotly chart room to breathe on small screens */
+    height: 400px; 
     padding: 10px;
     margin: 20px auto;
     box-sizing: border-box;
     overflow-x: auto;
   }
-
   .chart-container .plot-container,
   .chart-container .js-plotly-plot {
     height: 100% !important;
     width: 100% !important;
   }
-
-  .chart-container canvas {
+  .chart-container canvas { /* For Chart.js if used */
     width: 100% !important;
     height: 100% !important;
   }
@@ -452,6 +417,216 @@ hr.content-divider-minor {
     .updates-grid { grid-template-columns: 1fr; }
     .involvement-grid { grid-template-columns: 1fr; }
     .pie-chart-container { flex-direction: column; align-items: center; }
-    .pie-chart { max-width: 950px; } /* Adjust pie chart size */
-    .chart-container { max-width: 100%; } /* Allow charts to fill width */
+    .pie-chart { max-width: 100%; } /* Allow pie chart to fill width */
 }
+
+
+/* === CSS Appended from leaflet.html for Interactive Map === */
+#map { 
+    height: 75vh; 
+    width: 100%; 
+    box-shadow: 0 0 10px rgba(0,0,0,0.1); 
+    border-radius: var(--border-radius); 
+    margin-bottom: 15px; 
+    position: relative; /* <<<< ESSENTIAL CHANGE: Make #map the positioning context */
+}
+
+/* Info Box - positioned relative to #map */
+.info-box {
+    position: absolute;
+    top: 30px;    /* Adjusted: Simple offset from map top */
+    left: 55px;   /* Adjusted: Simple offset from map left */
+    background: rgba(255, 255, 255, 0.92);
+    padding: 0; 
+    border-radius: 6px;
+    z-index: 1010; /* Ensure it's above map tiles and most controls */
+    max-width: 320px;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.2);
+    font-size: 0.875em; 
+}
+.info-box-header {
+    padding: 10px 15px;
+    font-size: 1.1em;
+    color: #2c3e50; 
+    border-bottom: 1px solid #e0e0e0; 
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold; 
+}
+.info-box-header:hover { background-color: #f9f9f9; }
+.info-box-toggle-icon { font-size: 0.8em; margin-left: 5px; }
+.info-box-content { padding: 0px 15px 12px 15px; line-height: 1.5; }
+.info-box-content.collapsed { display: none; }
+.info-box-content p { margin-bottom: 6px; color: #34495e; margin-top: 10px; }
+.info-box-content p:first-child { margin-top: 8px; }
+
+#server-notice-container div { 
+    padding: 10px; 
+    background-color: #fffbe6; 
+    border: 1px solid #ffe58f; 
+    text-align: center; 
+    font-family: var(--primary-font); 
+    font-size: 0.9em; 
+    color: #8a6d3b; 
+    margin-bottom:10px;
+    border-radius: var(--border-radius);
+}
+
+/* Custom Layer Control Container - positioned relative to #map */
+.custom-layer-control-container {
+    position: absolute;
+    top: 10px;   /* Adjusted: Simple offset from map top */
+    right: 10px;  /* Adjusted: Simple offset from map right */
+    z-index: 1011; /* Above info box and other controls */
+    background: rgba(255, 255, 255, 0.92);
+    border-radius: 6px;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.2);
+    font-size: 0.9em;
+}
+.layer-control-header {
+    padding: 8px 12px;
+    font-size: 1.05em;
+    font-weight: bold;
+    color: #2c3e50;
+    cursor: pointer;
+    border-bottom: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.layer-control-header:hover { background-color: #f9f9f9; }
+.layer-control-toggle-icon { font-size: 0.8em; margin-left: 5px; }
+.leaflet-control-layers-host { /* Container for Leaflet's control DOM */ }
+.leaflet-control-layers-host.collapsed-control { display: none; }
+.custom-layer-control-container .leaflet-control-layers { 
+    box-shadow: none; 
+    border-radius: 0 0 6px 6px; 
+    border-top: none; 
+}
+.leaflet-control-layers-expanded { padding: 8px 10px; }
+.leaflet-control-layers-list { line-height: 1.6; }
+.leaflet-control-layers-selector { margin-bottom: 4px; vertical-align: middle; }
+.leaflet-control-layers-separator { margin: 5px 0; border-top: 1px solid #e0e0e0; }
+
+.leaflet-popup-content-wrapper { border-radius: 6px; box-shadow: 0 1px 5px rgba(0,0,0,0.15); }
+.leaflet-popup-content { font-size: 0.875em; line-height: 1.6; margin: 10px 12px; }
+.leaflet-popup-content strong { 
+    font-size: 1.05em; 
+    color: var(--primary-color); 
+    display: block; 
+    margin-bottom: 5px; 
+    border-bottom: 1px solid #f0f0f0; 
+    padding-bottom: 4px; 
+    font-family: var(--heading-font); 
+}
+.leaflet-popup-content em { font-style: normal; font-weight: 500; color: #555; }
+
+.legend {
+    color: #444; background-color: rgba(255, 255, 255, 0.93); padding: 0; 
+    border-radius: 5px; box-shadow: 0 1px 7px rgba(0,0,0,0.25);
+    font-size: 0.825em; min-width: 160px; max-width: 240px; 
+    z-index: 1005; /* Default Leaflet controls are around 1000 */
+}
+.legend-header {
+    padding: 8px 12px; font-size: 1.05em; font-weight: bold; color: #2c3e50;
+    cursor: pointer; border-bottom: 1px solid #e0e0e0; display: flex;
+    justify-content: space-between; align-items: center;
+}
+.legend-header:hover { background-color: #f9f9f9; }
+.legend-toggle-icon { font-size: 0.8em; margin-left: 5px; }
+.legend-content { padding: 8px 12px; max-height: 350px; overflow-y: auto; } 
+.legend-content.collapsed { display: none; }
+.legend h4 { 
+    margin: 8px 0 6px; 
+    font-size: 0.95em; 
+    font-weight: bold; 
+    color: var(--primary-color); 
+    text-align: left; 
+    font-family: var(--heading-font);
+}
+.legend h4:first-child { margin-top: 0; }
+.legend .legend-subtitle { text-align: left; font-size: 0.85em; margin-bottom: 6px; color: #555; display: block; }
+.legend .legend-item { display: flex; align-items: center; margin-bottom: 4px; justify-content: space-between;}
+.legend .legend-item-main { display: flex; align-items: center; flex-grow: 1;}
+.legend i { width: 16px; height: 16px; flex-shrink: 0; margin-right: 8px; opacity: 0.9; border: 1px solid #bbb; }
+.legend .legend-item img.legend-swatch-image { width: 18px; height: 18px; margin-right: 8px; border: 1px solid #ddd; }
+.legend .legend-text { flex-grow: 1; line-height: 1.3; }
+.legend .arcgis-legend-item i { background-color: #eee; border: 1px dashed #999; }
+.legend .zoom-to-layer-btn {
+    font-size: 0.9em; padding: 1px 4px; margin-left: 8px; cursor: pointer;
+    border: 1px solid #ccc; border-radius: 3px; background-color: #f0f0f0;
+    white-space: nowrap; 
+    color: var(--dark-text);
+}
+.legend .zoom-to-layer-btn:hover { background-color: #e0e0e0; }
+
+.town-label, .pond-label {
+    background-color: transparent; border: none; box-shadow: none;
+    font-weight: bold; color: #222; 
+    text-shadow: 1px 1px 2px white, -1px -1px 2px white, 1px -1px 2px white, -1px 1px 2px white; 
+}
+.town-label { font-size: 10px; }
+.pond-label { 
+    font-size: 11px; 
+    font-weight: 500; 
+    color: #004C6D; 
+    text-shadow: 1px 1px 1px #fff, -1px -1px 1px #fff, 1px -1px 1px #fff, -1px 1px 1px #fff, 0 0 3px #fff; 
+}
+        
+#map-loader {
+    position: absolute; 
+    top: 50%;  /* Centered on map container */
+    left: 50%; 
+    transform: translate(-50%, -50%); /* Proper centering */
+    z-index: 2000; 
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 5px 10px; 
+    border-radius: 4px; 
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    display: none; 
+    font-family: var(--primary-font);
+    color: var(--dark-text);
+}
+.spinner {
+    border: 3px solid #f3f3f3; 
+    border-top: 3px solid var(--secondary-color); 
+    border-radius: 50%; 
+    width: 16px; height: 16px;
+    animation: spin 1s linear infinite; 
+    display: inline-block; 
+    margin-right: 5px;
+    vertical-align: middle;
+}
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+.leaflet-control-container .leaflet-control {
+    font-family: var(--primary-font); 
+}
+
+/* Responsive adjustments for map elements (now relative to map) */
+@media (max-width: 768px) {
+    #map {
+        height: 60vh; 
+    }
+    .info-box {
+        max-width: 280px; 
+        font-size: 0.8em; 
+        top: 5px;    /* Adjusted: Closer to map edge on mobile */
+        left:5px;   /* Adjusted: Closer to map edge on mobile */
+    }
+    .custom-layer-control-container {
+        font-size: 0.85em;
+        top: 5px;    /* Adjusted: Closer to map edge on mobile */
+        right: 5px;  /* Adjusted: Closer to map edge on mobile */
+    }
+    .legend {
+        font-size: 0.75em; 
+        max-width: 200px;
+    }
+    .legend-content {
+         max-height: 200px; 
+    }
+}
+/* === End of Appended CSS for Interactive Map === */
